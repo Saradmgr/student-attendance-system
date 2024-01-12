@@ -76,13 +76,13 @@ table {
   margin-top: 20px;
 }
 
-/* th {
+th {
   background-color: #333;
   color: #fff;
   font-weight: bold;
   padding: 8px;
   text-align: left;
-} */
+}
 
 td {
   background-color: #fff;
@@ -179,14 +179,4 @@ input[type="submit"]:hover {
 
 .dropdown:hover .dropdown-content {
   display: block;
-}
-.img-wrapper{
-  height: 80px;
-  width: 80px;
-}
-.card-img-top{
-  width: auto;
-  height: 80px;
-  border-radius: 50%;
-object-fit: cover;
 }
