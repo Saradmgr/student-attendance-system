@@ -122,7 +122,7 @@ if (isset($_POST['submit'])) {
                   </div>
                   <div class="mb-3">
                     <label for="num" class="form-label">Enter your phone number</label>
-                    <input type="number" class="form-control" id="num" name="num" required>
+                    <input type="tel" class="form-control" id="num" name="num" required>
                   </div>
                   <div class="mb-3">
                     <label for="email" class="form-label">Enter your email</label>
@@ -135,7 +135,7 @@ if (isset($_POST['submit'])) {
                 </div>
               </div>
               <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary">Submit</button>
+              <input type="submit" name="submit" value="Register" class="form-btn">
               </div>
             </form>
         </div>

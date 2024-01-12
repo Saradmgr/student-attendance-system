@@ -18,13 +18,13 @@ include 'config.php';
     <div class="container-fluid d-flex p-0">
         <div class=" sidebar d-flex flex-column flex-shrink-0 p-3" style="width: 280px; height: 100vh;">
             <div class="">
-                <a href="dashboardstd.html">Dashboard</a>
+                <a href="dashboardstd.php">Dashboard</a>
                 <a href="todays-schedule.php">Today's Schedule</a>
             </div>
         </div>
         <div class="ms-4 me-4 mt-4 w-100">
             <div class="d-flex mb-4 justify-content-between">
-                <a class="back-button btn-secondary" href="dashboardstd.html">Back to Home</a>
+                <a class="back-button btn-secondary" href="dashboardstd.php">Back to Home</a>
                 <a href="login_form.php" class="btn btn-outline-primary back-button">Logout</a>
             </div>
             <div class="d-flex justify-content-center align-items-center">
@@ -59,8 +59,6 @@ include 'config.php';
         } else {
           echo "No data found.";
         }
-
-        // Close the database connection
         mysqli_close($conn);
         ?>
         </div>
