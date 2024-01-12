@@ -7,13 +7,15 @@ if (isset($_POST['submit'])) {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = $_POST['password'];
 
-    $select = "SELECT * FROM user_form WHERE email = '$email'";
+    $select = "SELECT id, password, user_type FROM user_form WHERE email = '$email'";
     $result = mysqli_query($conn, $select);
 
     if ($result && mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
 
         if (password_verify($password, $row['password'])) {
+            $_SESSION['id'] = $row['id'];
+
             if ($row['user_type'] == 'admin') {
                 $_SESSION['admin_name'] = $row['name'];
                 header('location:homepage.php');

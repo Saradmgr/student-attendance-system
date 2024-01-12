@@ -1,12 +1,12 @@
 <?php
 include 'config.php';
 session_start();
-//  if (!isset($_SESSION['id'])) {
-//     header('Location: login_form.php');
-//     exit(); }
-
-// $user_id = $_SESSION['id'];
-$sql = "SELECT name, lname, gender, num, email FROM user_form WHERE id = 10"; 
+if (!isset($_SESSION['id'])) {
+    header('Location: login_form.php');
+    exit();
+}
+$user_id = $_SESSION['id'];
+$sql = "SELECT name, lname, gender, num, email FROM user_form WHERE id = $user_id";
 $result = mysqli_query($conn, $sql);
 
 if ($result && mysqli_num_rows($result) > 0) {
@@ -17,12 +17,11 @@ if ($result && mysqli_num_rows($result) > 0) {
     $gender = $row['gender'];
     $email = $row['email'];
 } else {
-    $name = $lname = $gender = $addr = $num = $email = "Not available";
+    $name = $lname = $gender = $num = $email = "Not available";
 }
 
 mysqli_close($conn);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
