@@ -19,6 +19,10 @@ if ($result && mysqli_num_rows($result) > 0) {
 } else {
     $name = $lname = $gender = $num = $email = "Not available";
 }
+if (isset($_POST['request_attendance'])) {
+    header('Location: attendance_request.php');
+    exit();
+}
 
 mysqli_close($conn);
 ?>
@@ -48,7 +52,9 @@ mysqli_close($conn);
             </div>
             <div class="d-flex align-items-center">
                 <h4>Attendance Request:</h4>
-                <button type="button" class="ms-3 btn btn-primary">Request Attendance</button>
+                <form action="attendance_request.php" method="post">
+                <button type="submit" name="request_attendance" class="btn btn-primary">Request Attendance</button>
+                </form>
             </div>
             <div class="card mt-4 py-4 px-2" style="width: 18rem;">
                 <div class="img-wrapper">
