@@ -1,10 +1,12 @@
 <?php
 include 'config.php';
 session_start();
+
 if (!isset($_SESSION['id'])) {
     header('Location: login_form.php');
     exit();
 }
+
 $user_id = $_SESSION['id'];
 $sql = "SELECT name, lname, gender, num, email FROM user_form WHERE id = $user_id";
 $result = mysqli_query($conn, $sql);
@@ -19,13 +21,8 @@ if ($result && mysqli_num_rows($result) > 0) {
 } else {
     $name = $lname = $gender = $num = $email = "Not available";
 }
-if (isset($_POST['request_attendance'])) {
-    header('Location: attendance_request.php');
-    exit();
-}
-
-mysqli_close($conn);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,7 +50,7 @@ mysqli_close($conn);
             <div class="d-flex align-items-center">
                 <h4>Attendance Request:</h4>
                 <form action="attendance_request.php" method="post">
-                <button type="submit" name="request_attendance" class="btn btn-primary">Request Attendance</button>
+                    <button type="submit" name="request_attendance" class="btn btn-primary">Request Attendance</button>
                 </form>
             </div>
             <div class="card mt-4 py-4 px-2" style="width: 18rem;">
