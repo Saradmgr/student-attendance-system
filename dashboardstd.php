@@ -21,6 +21,11 @@ if ($result && mysqli_num_rows($result) > 0) {
 } else {
     $name = $lname = $gender = $num = $email = "Not available";
 }
+$currentDate = date("Y-m-d");
+$checkSql = "SELECT * FROM attendance_requests WHERE user_id = $user_id AND DATE(timestamp) = '$currentDate'";
+$checkResult = mysqli_query($conn, $checkSql);
+$attendanceRequested = ($checkResult && mysqli_num_rows($checkResult) > 0);
+
 ?>
 
 <!DOCTYPE html>
@@ -50,11 +55,17 @@ if ($result && mysqli_num_rows($result) > 0) {
             <div class="d-flex align-items-center">
                 <h4>Attendance Request:</h4>
                 <form action="attendance_request.php" method="post">
-                    <button type="submit" name="request_attendance" class="btn btn-primary">Request Attendance</button>
+                    <?php
+                    if ($attendanceRequested) {
+                        echo '<button type="button" class="btn btn-success" disabled>Requested</button>';
+                    } else {
+                        echo '<button type="submit" name="request_attendance" class="btn btn-primary">Request Attendance</button>';
+                    }
+                    ?>
                 </form>
             </div>
             <div class="card mt-4 py-4 px-2" style="width: 18rem;">
-                <div class="img-wrapper">
+            <div class="img-wrapper">
                     <img src="man.png" class="card-img-top" alt="Student Profile Picture">
                 </div>
                 <div class="card-body">

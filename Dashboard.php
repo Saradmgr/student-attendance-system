@@ -1,8 +1,8 @@
 <?php
 session_start();
 include('config.php');
-
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -95,9 +95,6 @@ include('config.php');
           <div>
             <div class="green-light"></div><span>Present</span>
           </div>
-          <div>
-            <div class="yellow-light"></div><span>Application</span>
-          </div>
         </div>
         <table class="table">
           <thead>
@@ -111,9 +108,9 @@ include('config.php');
             <?php
             include 'config.php';
             // SQL query to fetch data from the table
-            $sql = "SELECT user_form.roll, user_form.name, user_form.lname, attendance.status
+            $sql = "SELECT user_form.roll, user_form.name, user_form.lname, attendance_status.status
             FROM user_form
-            INNER JOIN attendance ON user_form.id = attendance.id";
+            INNER JOIN attendance_status ON user_form.id = attendance_status.user_id";
             $result = mysqli_query($conn, $sql);
 
             if ($result->num_rows > 0) {
