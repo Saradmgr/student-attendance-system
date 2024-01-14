@@ -62,12 +62,10 @@ include('config.php');
                             <th>Address</th>
                             <th>Number</th>
                             <th>Email</th>
-                            <!-- Add more columns as needed -->
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        // Modify the SQL query to fetch data only if user_type is 'user'
                         $sql = "SELECT roll, name, lname, gender, addr, num, email FROM user_form WHERE user_type = 'user'";
                         $result = mysqli_query($conn, $sql);
 

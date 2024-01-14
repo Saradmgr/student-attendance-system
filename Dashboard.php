@@ -40,9 +40,6 @@ include('config.php');
       <div class="dashboard-item" onclick="showStudentDetails()">
         <label>Total Students:</label>
       </div>
-
-      <!-- Add more dashboard functions and items as needed -->
-
     </div>
     <div class="container">
       <a class="back-button" href="homepage.php">Back to Home</a>
@@ -78,11 +75,11 @@ include('config.php');
         } else {
           echo "No data found.";
         }
-
-        // Close the database connection
         mysqli_close($conn);
         ?>
         <a href="update1.php">Update Information</a>
+        <a href="update.php">Add Information</a>
+
       </div>
 
 
@@ -107,29 +104,23 @@ include('config.php');
           <tbody>
             <?php
             include 'config.php';
-            // SQL query to fetch data from the table
             $sql = "SELECT user_form.roll, user_form.name, user_form.lname, attendance_status.status
             FROM user_form
             INNER JOIN attendance_status ON user_form.id = attendance_status.user_id";
             $result = mysqli_query($conn, $sql);
 
             if ($result->num_rows > 0) {
-              // Loop through the result set and display data in a table
               while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td>" . $row["roll"] . "</td>";
                 echo "<td>" . $row["name"] . " " . $row["lname"] . "</td>";
 
                 $attendanceValue = $row["status"];
-
-                // Set the cell content based on the attendanceValue
                 echo "<td class='status-cell'>";
                 if ($attendanceValue == 0) {
                   echo "<div class='red-light'></div>";
                 } elseif ($attendanceValue == 1) {
                   echo "<div class='green-light'></div>";
-                } elseif ($attendanceValue == 2) {
-                  echo "<div class='yellow-light'></div>";
                 }
                 echo "</td>";
 
