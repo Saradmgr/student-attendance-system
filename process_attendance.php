@@ -14,8 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 function updateAttendanceStatus($userId, $status) {
     global $conn;
     $currentTimestamp = date("Y-m-d H:i:s");
-
-    // Check if there is an existing entry for the current user and date
     $fetchSql = "SELECT * FROM attendance_requests WHERE user_id = $userId AND DATE(timestamp) = CURDATE()";
     $fetchResult = mysqli_query($conn, $fetchSql);
 
