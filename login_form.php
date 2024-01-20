@@ -4,31 +4,31 @@
 session_start();
 
 if (isset($_POST['submit'])) {
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = $_POST['password'];
+   $email = mysqli_real_escape_string($conn, $_POST['email']);
+   $password = $_POST['password'];
 
-    $select = "SELECT id, password, user_type FROM user_form WHERE email = '$email'";
-    $result = mysqli_query($conn, $select);
+   $select = "SELECT id, password, user_type FROM user_form WHERE email = '$email'";
+   $result = mysqli_query($conn, $select);
 
-    if ($result && mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
+   if ($result && mysqli_num_rows($result) > 0) {
+      $row = mysqli_fetch_assoc($result);
 
-        if (password_verify($password, $row['password'])) {
-            $_SESSION['id'] = $row['id'];
+      if (password_verify($password, $row['password'])) {
+         $_SESSION['id'] = $row['id'];
 
-            if ($row['user_type'] == 'admin') {
-                $_SESSION['admin_name'] = $row['name'];
-                header('location:homepage.php');
-            } elseif ($row['user_type'] == 'user') {
-                $_SESSION['user_name'] = $row['name'];
-                header('location:dashboardstd.php');
-            }
-        } else {
-            $error[] = 'Incorrect email or password!';
-        }
-    } else {
-        $error[] = 'User not found!';
-    }
+         if ($row['user_type'] == 'admin') {
+            $_SESSION['admin_name'] = $row['name'];
+            header('location:homepage.php');
+         } elseif ($row['user_type'] == 'user') {
+            $_SESSION['user_name'] = $row['name'];
+            header('location:dashboardstd.php');
+         }
+      } else {
+         $error[] = 'Incorrect email or password!';
+      }
+   } else {
+      $error[] = 'User not found!';
+   }
 }
 ?>
 <!DOCTYPE html>
@@ -39,23 +39,51 @@ if (isset($_POST['submit'])) {
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Login Form</title>
-   <link rel="stylesheet" href="css/style.css">
+   <link href="bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+   <link rel="stylesheet" href="login.css">
+   <script src="d1f255366e.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
+   <div class="">
+      <div class="container py-5">
+         <div class="row">
+            <div class="col-md-6">
+               <img src="undraw_remotely_2j6y.svg" alt="Image" class="img-fluid">
+            </div>
+            <div class="col-md-6 contents">
+               <div class="row justify-content-center">
+                  <div class="col-md-8">
+                     <div class="mb-4">
+                        <h3>Sign In</h3>
+                     </div>
+                     <form action="" method="post">
+                        <div class="form-group first mb-4">
+                           <label for="username">Username</label>
+                           <input type="email" class="form-control" name="email" required placeholder="Enter your email"
+                              autocomplete="off">
+                        </div>
 
-   <div class="form-container">
-      <form action="" method="post">
-         <h3>Login Now</h3>
-         <input type="email" name="email" required placeholder="Enter your email" autocomplete="off">
-         <div class="password-container">
-            <input type="password" name="password" id="password" required placeholder="Enter your password" autocomplete="off">
-            <span class="toggle-password" onclick="togglePassword()">Show</span>
+                        <div class="form-group last mb-4">
+                           <label for="password">Password</label>
+                           <div class="input-group mb-3">
+                              <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                              <input class="form-control" id="password" name="password" placeholder="Password" value="">
+                              <span class="input-group-text">
+                                 <i class="far fa-eye" id="togglePassword" onclick="togglePassword()"
+                                    style="cursor: pointer"></i>
+                              </span>
+                           </div>
+                        </div>
+                        <input type="submit" value="Log In" name="submit" class="btn btn-block btn-primary">
+                     </form>
+                  </div>
+               </div>
+            </div>
          </div>
-         <input type="submit" name="submit" value="Login Now" class="form-btn">
-      </form>
+      </div>
    </div>
-
    <script>
       function togglePassword() {
          var passwordInput = document.getElementById("password");
@@ -70,7 +98,7 @@ if (isset($_POST['submit'])) {
          }
       }
    </script>
-
+   <script src="bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+      crossorigin="anonymous"></script>
 </body>
-
 </html>

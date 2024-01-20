@@ -1,6 +1,8 @@
 <?php
 include 'config.php';
 session_start();
+
+// Set the time zone to Nepal
 date_default_timezone_set('Asia/Kathmandu');
 
 if (!isset($_SESSION['id'])) {
