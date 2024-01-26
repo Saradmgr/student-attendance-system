@@ -6,10 +6,10 @@ $message = "";
 if (isset($_POST['submit'])) {
     $name = mysqli_real_escape_string($conn, $_POST['name']);
     $lname = mysqli_real_escape_string($conn, $_POST['lname']);
-    $roll = isset($_POST['roll']) ? (int)$_POST['roll'] : null;
+    $roll = isset($_POST['roll']) ? (int) $_POST['roll'] : null;
     $email = isset($_POST['email']) ? mysqli_real_escape_string($conn, $_POST['email']) : null;
     $addr = isset($_POST['addr']) ? mysqli_real_escape_string($conn, $_POST['addr']) : null;
-    $num = isset($_POST['num']) ? (int)$_POST['num'] : null;
+    $num = isset($_POST['num']) ? (int) $_POST['num'] : null;
 
     $userTypeCheckSql = "SELECT user_type FROM user_form WHERE name='$name' AND lname='$lname'";
     $userTypeResult = mysqli_query($conn, $userTypeCheckSql);
@@ -69,17 +69,17 @@ if (isset($_POST['submit'])) {
             display: none;
         }
     </style>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var successMessage = document.getElementById('success-message');
-        document.querySelector('form').addEventListener('submit', function (e) {
-            successMessage.style.display = 'block';
-            setTimeout(function () {
-                successMessage.style.display = 'none';
-            }, 3000);
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var successMessage = document.getElementById('success-message');
+            document.querySelector('form').addEventListener('submit', function (e) {
+                successMessage.style.display = 'block';
+                setTimeout(function () {
+                    successMessage.style.display = 'none';
+                }, 3000);
+            });
         });
-    });
-</script>
+    </script>
 
 </head>
 
@@ -113,8 +113,10 @@ if (isset($_POST['submit'])) {
         </div>
         <div class="ms-4 me-4 mt-4 w-100">
             <div class="d-flex mb-4 justify-content-between">
-                <a class="back-button btn-secondary" href="homepage.php">Back to Home</a>
-                <a href="login_form.php" class="btn btn-outline-primary back-button">Logout</a>
+                <a class="back-button btn-secondary" href="homepage.php" style="padding:5px 10px; height:36px">Back to
+                    Home</a>
+                <a href="login_form.php" class="btn btn-outline-primary back-button"
+                    style="padding:5px 10px; height:36px">Logout</a>
             </div>
             <div>
                 <h5>Update Student Details</h5>
@@ -158,15 +160,17 @@ if (isset($_POST['submit'])) {
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end">
-                                <button type="submit" class="btn btn-primary" name="submit">Update All</button>
+                                <button type="submit" class="btn btn-primary" name="submit">Update</button>
                             </div>
-                            <div class="d-flex justify-content-end mt-2">
+                            <!-- <div class="d-flex justify-content-end mt-2">
                                 <button type="submit" class="btn btn-primary" name="submit">Update Address</button>
                                 <button type="submit" class="btn btn-primary ms-2" name="submit">Update Email</button>
                                 <button type="submit" class="btn btn-primary ms-2" name="submit">Update Rollno</button>
                                 <button type="submit" class="btn btn-primary ms-2" name="submit">Update Phone Number</button>
+                            </div> -->
+                            <div id="success-message" class="mt-2">
+                                <?php echo $message; ?>
                             </div>
-                            <div id="success-message" class="mt-2"><?php echo $message; ?></div>
                         </form>
                     </div>
                 </div>
@@ -176,4 +180,5 @@ if (isset($_POST['submit'])) {
     <script src="bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>
 </body>
+
 </html>

@@ -103,7 +103,7 @@ td {
 }
 
 .back-button {
-  padding: 10px 12px;
+  padding: 5px 12px;
   background-color: #007bff;
   color: #fff;
   text-decoration: none;
@@ -111,6 +111,9 @@ td {
   transition: opacity 0.3s ease;
   opacity: 1;
   text-align: center;
+}
+.btn-back {
+  padding: 5px 10px !important;
 }
 
 .back-button:hover {
@@ -169,7 +172,7 @@ input[type="submit"]:hover {
 }
 
 .dropdown-content .dashboard-item:hover {
-  background-color: #444;
+  background-color: #ac5b5b;
   cursor: pointer;
 }
 
@@ -180,13 +183,13 @@ input[type="submit"]:hover {
 .dropdown:hover .dropdown-content {
   display: block;
 }
-.img-wrapper{
+.img-wrapper {
   height: 80px;
   width: 80px;
 }
-.card-img-top{
+.card-img-top {
   width: auto;
   height: 80px;
   border-radius: 50%;
-object-fit: cover;
+  object-fit: cover;
 }

@@ -2,7 +2,6 @@
 include 'config.php';
 session_start();
 
-// Set the time zone to Nepal
 date_default_timezone_set('Asia/Kathmandu');
 
 if (!isset($_SESSION['id'])) {
@@ -25,9 +24,15 @@ if ($result && mysqli_num_rows($result) > 0) {
     $name = $lname = $gender = $num = $email = "Not available";
 }
 $currentDate = date("Y-m-d");
-$checkSql = "SELECT * FROM attendance_requests WHERE user_id = $user_id AND DATE(timestamp) = '$currentDate'";
-$checkResult = mysqli_query($conn, $checkSql);
-$attendanceRequested = ($checkResult && mysqli_num_rows($checkResult) > 0);
+
+// Check if there is an attendance request for the current date
+$checkRequestSql = "SELECT * FROM attendance_requests WHERE user_id = $user_id AND DATE(timestamp) = '$currentDate'";
+$checkRequestResult = mysqli_query($conn, $checkRequestSql);
+$attendanceRequested = ($checkRequestResult && mysqli_num_rows($checkRequestResult) > 0);
+
+// Check attendance status for the current date
+$checkStatusSql = "SELECT status FROM attendance_status WHERE user_id = $user_id AND DATE(timestamp) = '$currentDate'";
+$checkStatusResult = mysqli_query($conn, $checkStatusSql);
 
 ?>
 
@@ -56,17 +61,36 @@ $attendanceRequested = ($checkResult && mysqli_num_rows($checkResult) > 0);
                 <a href="login_form.php" class="btn btn-outline-primary back-button">Logout</a>
             </div>
             <div class="d-flex align-items-center">
-                <h4>Attendance Request:</h4>
-                <form action="attendance_request.php" method="post">
-                    <?php
-                    if ($attendanceRequested) {
-                        echo '<button type="button" class="btn btn-success" disabled>Requested</button>';
+        <h4>Attendance Request:</h4>
+        <form action="attendance_request.php" method="post">
+            <?php
+            if ($attendanceRequested && (!$checkStatusResult || mysqli_num_rows($checkStatusResult) == 0)) {
+                // Requested if in attendance_requests but not in attendance_status
+                echo '<button type="button" class="btn btn-warning" disabled>Requested</button>';
+            } else {
+                $attendanceStatus = null; // Initialize the variable outside the if block
+
+                if ($checkStatusResult && mysqli_num_rows($checkStatusResult) > 0) {
+                    $row = mysqli_fetch_assoc($checkStatusResult);
+                    $attendanceStatus = $row['status'];
+
+                    // Update the button text based on attendance status
+                    if ($attendanceStatus == 1) {
+                        $buttonText = 'Accepted';
+                    } elseif ($attendanceStatus == 0) {
+                        $buttonText = 'Declined';
                     } else {
-                        echo '<button type="submit" name="request_attendance" class="btn btn-primary">Request Attendance</button>';
+                        $buttonText = 'Request Attendance';
                     }
-                    ?>
-                </form>
-            </div>
+                } else {
+                    $buttonText = 'Request Attendance';
+                }
+
+                echo '<button type="submit" name="request_attendance" class="btn btn-primary" ' . ($attendanceStatus !== null ? 'disabled' : '') . '>' . $buttonText . '</button>';
+            }
+            ?>
+        </form>
+    </div>
             <div class="card mt-4 py-4 px-2" style="width: 18rem;">
             <div class="img-wrapper">
                     <img src="man.png" class="card-img-top" alt="Student Profile Picture">

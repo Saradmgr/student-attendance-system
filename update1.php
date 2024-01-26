@@ -30,7 +30,7 @@
   ?>
 
   <div class="container">
-    <h4 class="mt-5">Update Operation in PHP MySQL</h4>
+    <h4 class="mt-5">Update Teachers details</h4>
     <div class="row">
 
       <div class="col-lg-8">

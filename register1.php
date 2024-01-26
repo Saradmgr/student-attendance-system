@@ -92,8 +92,10 @@ if (isset($_POST['submit'])) {
         </div>
         <div class="ms-4 me-4 mt-4 w-100">
             <div class="d-flex mb-4 justify-content-between">
-                <a class="back-button btn-secondary" href="homepage.php">Back to Home</a>
-                <a href="login_form.php" class="btn btn-outline-primary back-button">Logout</a>
+                <a class="back-button btn-secondary" href="homepage.php" style="padding:5px 10px; height:36px">Back to
+                    Home</a>
+                <a href="login_form.php" class="btn btn-outline-primary back-button"
+                    style="padding:5px 10px; height:36px">Logout</a>
             </div>
             <div id="registerstudent" class="w-100 d-flex justify-content-center">
                 <div class="form-container">
@@ -118,17 +120,36 @@ if (isset($_POST['submit'])) {
                                     <input type="text" class="form-control" id="name" name="name" required>
                                 </div>
                                 <div class="mb-3">
+                                    <label class="form-label">Gender</label>
+                                    <div class="d-flex">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="gender" id="male"
+                                                value="male" checked>
+                                            <label class="form-check-label" for="male">Male</label>
+                                        </div>
+                                        <div class="form-check mx-2">
+                                            <input class="form-check-input" type="radio" name="gender" id="female"
+                                                value="female">
+                                            <label class="form-check-label" for="female">Female</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="gender" id="other"
+                                                value="other">
+                                            <label class="form-check-label" for="other">Other</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="mb-3">
                                     <label for="gender" class="form-label">Enter your gender</label>
                                     <input type="text" class="form-control" id="gender" name="gender" required>
-                                </div>
+                                </div> -->
                                 <div class="mb-3">
                                     <label for="addr" class="form-label">Enter your address</label>
                                     <input type="text" class="form-control" id="addr" name="addr" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Enter your password</label>
-                                    <input type="password" class="form-control" id="password" name="password"
-                                        required>
+                                    <input type="password" class="form-control" id="password" name="password" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="user_type" class="form-label">Select user type</label>
@@ -167,8 +188,7 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
 
-    <script src="bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+    <script src="bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>
     <script>
         // Display the result message for 3 seconds
@@ -177,4 +197,5 @@ if (isset($_POST['submit'])) {
         }, 3000);
     </script>
 </body>
+
 </html>

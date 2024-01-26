@@ -11,7 +11,7 @@
 <body>
   <div class="container">
 
-    <h4 class="mt-5">Insert Operation in PHP MySQL</h4>
+    <h4 class="mt-5">Insert new Subjects</h4>
     <div class="row">
       <div class="col-lg-8">
 

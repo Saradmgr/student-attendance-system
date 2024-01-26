@@ -110,3 +110,52 @@ body {
 .back-button:hover {
   background-color: #444;
 }
+
+.main-notice-date {
+  min-width: 100px;
+  max-width: 100px;
+}
+.main-notice-date {
+  background-color: #2b6eb5;
+}
+.news-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.news-item {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #fff;
+}
+
+.news-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.news-date {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.news-content {
+  line-height: 1.6;
+}
+.dropdown-list-image {
+  position: relative;
+  height: 2.5rem;
+  width: 2.5rem;
+}
+.dropdown-list-image img {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+.btn-light {
+  color: #2cdd9b;
+  background-color: #e5f7f0;
+  border-color: #d8f7eb;
+}
