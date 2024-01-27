@@ -2,6 +2,7 @@
 include 'config.php';
 $message = "";
 $messageClass = "";
+
 if (isset($_POST['submit'])) {
     $roll = $_POST['roll'];
     $name = $_POST['name'];
@@ -138,6 +139,7 @@ if (isset($_POST['submit'])) {
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>
     <script>
+        // Display alert for 3 seconds and then hide it
         setTimeout(function () {
             document.querySelector('.alert').style.display = 'none';
         }, 3000);

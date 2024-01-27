@@ -1,53 +1,6 @@
 <?php
 session_start();
 include('config.php');
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteRoll'])) {
-    $rollToDelete = $_POST['deleteRoll'];
-
-    // Check if there are related records in the child tables
-    $checkQuery1 = "SELECT user_id FROM attendance_requests WHERE user_id = '$rollToDelete'";
-    $checkQuery2 = "SELECT user_id FROM attendance_status WHERE user_id = '$rollToDelete'";
-
-    $checkResult1 = mysqli_query($conn, $checkQuery1);
-    $checkResult2 = mysqli_query($conn, $checkQuery2);
-
-    if ($checkResult1 && $checkResult2) {
-        $hasRelatedRecords = ($checkResult1->num_rows > 0) || ($checkResult2->num_rows > 0);
-
-        if ($hasRelatedRecords) {
-            // Handle the situation where there are related records
-            echo "Cannot delete student with Roll No. $rollToDelete because of related attendance records.";
-        } else {
-            // No related records, proceed with deletion
-            mysqli_autocommit($conn, false);
-
-            // Delete from attendance_requests
-            $deleteQuery1 = "DELETE FROM attendance_requests WHERE user_id = '$rollToDelete'";
-            $deleteResult1 = mysqli_query($conn, $deleteQuery1);
-
-            // Delete from attendance_status
-            $deleteQuery2 = "DELETE FROM attendance_status WHERE user_id = '$rollToDelete'";
-            $deleteResult2 = mysqli_query($conn, $deleteQuery2);
-
-            // Delete from user_form
-            $deleteQuery3 = "DELETE FROM user_form WHERE roll = '$rollToDelete' AND user_type = 'user'";
-            $deleteResult3 = mysqli_query($conn, $deleteQuery3);
-
-            if ($deleteResult1 && $deleteResult2 && $deleteResult3) {
-                mysqli_commit($conn);
-                echo "Record with Roll No. $rollToDelete deleted successfully.";
-            } else {
-                mysqli_rollback($conn);
-                echo "Error deleting record: " . mysqli_error($conn);
-            }
-
-            mysqli_autocommit($conn, true);
-        }
-    } else {
-        echo "Error checking related records: " . mysqli_error($conn);
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -112,36 +65,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteRoll'])) {
                     <th>Address</th>
                     <th>Number</th>
                     <th>Email</th>
-                    <!-- <th>Action</th> -->
                 </tr>
             </thead>
             <tbody>
                 <?php
-                $sql = "SELECT roll, name, lname, gender, addr, num, email FROM user_form WHERE user_type = 'user'";
-                $result = mysqli_query($conn, $sql);
-
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . $row["roll"] . "</td>";
-                        echo "<td>" . $row["name"] . "</td>";
-                        echo "<td>" . $row["lname"] . "</td>";
-                        echo "<td>" . $row["gender"] . "</td>";
-                        echo "<td>" . $row["addr"] . "</td>";
-                        echo "<td>" . $row["num"] . "</td>";
-                        echo "<td>" . $row["email"] . "</td>";
-                        // echo "<td>
-                        //         <form method='post' action=''>
-                        //             <input type='hidden' name='deleteRoll' value='" . $row["roll"] . "'>
-                        //             <button type='submit' class='btn btn-danger'>Delete</button>
-                        //         </form>
-                        //       </td>";
-                        echo "</tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='8'>No data found</td></tr>";
-                }
-                $conn->close();
+               $sql = "SELECT roll, name, lname, gender, addr, num, email FROM user_form WHERE user_type = 'user' ORDER BY roll ASC";
+               $result = mysqli_query($conn, $sql);
+               
+               if ($result->num_rows > 0) {
+                   while ($row = $result->fetch_assoc()) {
+                       echo "<tr>";
+                       echo "<td>" . $row["roll"] . "</td>";
+                       echo "<td>" . $row["name"] . "</td>";
+                       echo "<td>" . $row["lname"] . "</td>";
+                       echo "<td>" . $row["gender"] . "</td>";
+                       echo "<td>" . $row["addr"] . "</td>";
+                       echo "<td>" . $row["num"] . "</td>";
+                       echo "<td>" . $row["email"] . "</td>";
+                       echo "</tr>";
+                   }
+               } else {
+                   echo "<tr><td colspan='8'>No data found</td></tr>";
+               }
+               $conn->close();
                 ?>
             </tbody>
         </table>

@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submitDate'])) {
     FROM user_form
     LEFT JOIN attendance_status ON user_form.id = attendance_status.user_id
     AND DATE(attendance_status.timestamp) = '$selectedDate'
-    WHERE user_form.user_type = 'user'";
+    WHERE user_form.user_type = 'user' ORDER BY roll ASC";
     $result = mysqli_query($conn, $sql);
 
     if ($result && $result->num_rows > 0) {
@@ -171,9 +171,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submitDate'])) {
                     $attendanceValue = $row["status"];
                     echo "<td class='status-cell'>";
                     if ($attendanceValue == 0) {
-                        echo "<div class='red-light'></div>";
+                        echo "<div class='red-light'></div> Absent";
                     } elseif ($attendanceValue == 1) {
-                        echo "<div class='green-light'></div>";
+                        echo "<div class='green-light'></div>Present";
                     }
                     echo "</td>";
 
