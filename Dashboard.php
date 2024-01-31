@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submitDate'])) {
     FROM user_form
     LEFT JOIN attendance_status ON user_form.id = attendance_status.user_id
     AND DATE(attendance_status.timestamp) = '$selectedDate'
-    WHERE user_form.user_type = 'user' ORDER BY roll ASC";
+    WHERE user_form.user_type = 'user'ORDER BY roll ASC";
     $result = mysqli_query($conn, $sql);
 
     if ($result && $result->num_rows > 0) {
