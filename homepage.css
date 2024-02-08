@@ -154,26 +154,18 @@ input[type="submit"]:hover {
 }
 
 .dropdown .student:hover {
-  background-color: #444;
+  background-color: #34384b;
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #555;
   width: 160px;
-  z-index: 1;
 }
 
 .dropdown-content .dashboard-item {
   padding: 10px;
-  border-bottom: 1px solid #777;
   transition: background-color 0.3s ease;
-}
-
-.dropdown-content .dashboard-item:hover {
-  background-color: #ac5b5b;
-  cursor: pointer;
 }
 
 .dashboard-item label {
