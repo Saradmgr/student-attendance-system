@@ -56,7 +56,7 @@ if (isset($_POST['submit'])) {
                <div class="row justify-content-center">
                   <div class="col-md-8">
                      <div class="mb-4">
-                        <h3>Sign In</h3>
+                        <h3>Log In</h3>
                      </div>
                      <form action="" method="post">
                         <div class="form-group first mb-4">
@@ -101,4 +101,5 @@ if (isset($_POST['submit'])) {
    <script src="bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
       crossorigin="anonymous"></script>
 </body>
+
 </html>
